@@ -2,7 +2,13 @@ This is a booking room application. power with NextJS/TailwindCSS
 
 ## Getting Started
 
-1. Install dependencies
+1. clone repo
+
+```bash
+git clone https://github.com/tubebigbig/booking-room.git
+```
+
+2. Install dependencies
 
 ```bash
 npm install
@@ -14,7 +20,7 @@ pnpm i
 bun i
 ```
 
-2. Run the development server:
+3. Run the development server:
 
 ```bash
 npm run dev
