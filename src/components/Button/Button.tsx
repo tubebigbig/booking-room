@@ -8,7 +8,20 @@ export type ButtonProps = Readonly<{
   disabled?: boolean;
   className?: string;
   onClick?: MouseEventHandler<HTMLButtonElement>;
+  onMouseDown?: MouseEventHandler<HTMLButtonElement>;
+  onMouseUp?: MouseEventHandler<HTMLButtonElement>;
 }>;
+
+const Color = {
+  success: "teal",
+  error: "red",
+  warning: "yellow",
+  info: "blue",
+};
+
+function makeColorClass(color: ButtonProps["color"] = "success") {
+  return `border border-${Color[color]}-400 text-${Color[color]}-400 focus:border-${Color[color]}-500 hover:border-${Color[color]}-500 focus:text-${Color[color]}-500 hover:text-${Color[color]}-500`;
+}
 
 const Button = ({
   color = "success",
@@ -16,19 +29,23 @@ const Button = ({
   disabled,
   className,
   onClick,
+  onMouseDown,
+  onMouseUp,
 }: ButtonProps) => {
   return (
     <button
       className={clsx(
-        "my-ui-button",
+        "p-2 rounded-md",
         disabled && "opacity-50 cursor-not-allowed",
-        color === "success" && "border border-teal-400 text-teal-400",
-        color === "error" && "border border-red-400 text-red-400",
-        color === "warning" && "border border-yellow-400 text-yellow-400",
-        color === "info" && "border border-blue-400 text-blue-400",
+        color === "success" && makeColorClass("success"),
+        color === "error" && makeColorClass("error"),
+        color === "warning" && makeColorClass("warning"),
+        color === "info" && makeColorClass("info"),
         className
       )}
       onClick={(e) => !disabled && onClick?.(e)}
+      onMouseDown={(e) => !disabled && onMouseDown?.(e)}
+      onMouseUp={(e) => onMouseUp?.(e)}
     >
       {children}
     </button>
