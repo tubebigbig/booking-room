@@ -1,13 +1,18 @@
 import Button, { ButtonProps } from "@/components/Button";
+import clsx from "clsx";
 
 export type PlusButtonProps = Readonly<{
   disabled?: boolean;
 }> &
-  ButtonProps;
+  Omit<ButtonProps, "children">;
 
-const PlusButton = ({ disabled, ...props }: PlusButtonProps) => {
+const PlusButton = ({ disabled, className, ...props }: PlusButtonProps) => {
   return (
-    <Button className="my-ui-inline-block" disabled={disabled} {...props}>
+    <Button
+      className={clsx("my-ui-inline-block", className)}
+      disabled={disabled}
+      {...props}
+    >
       +
     </Button>
   );
